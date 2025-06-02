@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule, NavbarComponent, RouterOutlet],
   template: `
     <geo-navbar></geo-navbar>
-    <main class="min-h-[calc(100vh-4rem)] pt-16 px-4 md:px-8 lg:px-12 bg-gray-50 dark:bg-gray-900">
+    <main class="min-h-[calc(100vh-4rem)] md:pt-[1rem] pt-[5rem] px-4 md:px-8 lg:px-[1rem] bg-gray-50 dark:bg-gray-900">
       <div class="max-w-7xl mx-auto py-6">
         <router-outlet></router-outlet>
       </div>
