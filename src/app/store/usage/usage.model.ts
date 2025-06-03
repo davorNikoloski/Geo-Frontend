@@ -21,7 +21,7 @@ export interface UsageStats {
   avg_response_time: number;
   total_request_size: number;
   total_response_size: number;
-  api_id: number; // Added to fix the error
+  api_id: number;
 }
 
 export interface UsageSummary {
@@ -61,10 +61,16 @@ export interface GeocodingAnalytics {
   timestamp: string;
 }
 
+// Updated AnalyticsSummary to include both totals and averages
 export interface AnalyticsSummary {
   total_requests: number;
+  // Total values
+  total_distance: number;
+  total_duration: number;
+  // Average values
   avg_distance: number;
   avg_duration: number;
+  // Maximum values
   max_distance: number;
   max_duration: number;
 }

@@ -2,8 +2,8 @@
   <div class="p-8">
     <h2 class="text-2xl font-bold mb-6">Geocoding Analytics</h2>
     
-    <div *ngIf="geocodingAnalytics.length > 0; else noData" class="space-y-4">
-      <div *ngFor="let geo of geocodingAnalytics; trackBy: trackByGeocodingId" class="bg-slate-700/50 rounded-lg p-6">
+    <div *ngIf="filteredGeocodingAnalytics.length > 0; else noData" class="space-y-4">
+      <div *ngFor="let geo of filteredGeocodingAnalytics; trackBy: trackByGeocodingId" class="bg-slate-700/50 rounded-lg p-6">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
           <div class="flex items-center mb-2 md:mb-0">
             <div class="w-10 h-10 bg-gradient-to-br from-purple-400 to-indigo-500 rounded-lg flex items-center justify-center mr-4">

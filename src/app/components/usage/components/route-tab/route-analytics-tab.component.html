@@ -3,18 +3,25 @@
     <h2 class="text-2xl font-bold mb-6">Route Analytics</h2>
     
     <!-- Analytics Summary -->
-    <div *ngIf="analyticsSummary" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div *ngIf="analyticsSummary" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
       <div class="bg-slate-700/50 rounded-lg p-6">
         <h3 class="text-lg font-semibold text-emerald-400 mb-2">Total Requests</h3>
         <p class="text-3xl font-bold">{{ analyticsSummary.total_requests }}</p>
       </div>
       <div class="bg-slate-700/50 rounded-lg p-6">
-        <h3 class="text-lg font-semibold text-emerald-400 mb-2">Avg Distance</h3>
-        <p class="text-3xl font-bold">{{ (analyticsSummary.avg_distance / 1000) | number: '1.1-1' }} km</p>
+        <h3 class="text-lg font-semibold text-emerald-400 mb-2">Total Distance</h3>
+        <p class="text-3xl font-bold">{{ formatDistance(analyticsSummary.total_distance) }}</p>
+        <p class="text-sm text-slate-400 mt-1">Avg: {{ formatDistance(analyticsSummary.avg_distance) }}</p>
       </div>
       <div class="bg-slate-700/50 rounded-lg p-6">
-        <h3 class="text-lg font-semibold text-emerald-400 mb-2">Avg Duration</h3>
-        <p class="text-3xl font-bold">{{ formatTime(analyticsSummary.avg_duration) }}</p>
+        <h3 class="text-lg font-semibold text-emerald-400 mb-2">Total Duration</h3>
+        <p class="text-3xl font-bold">{{ formatTotalTime(analyticsSummary.total_duration) }}</p>
+        <p class="text-sm text-slate-400 mt-1">Avg: {{ formatTime(analyticsSummary.avg_duration) }}</p>
+      </div>
+      <div class="bg-slate-700/50 rounded-lg p-6">
+        <h3 class="text-lg font-semibold text-emerald-400 mb-2">Max Distance</h3>
+        <p class="text-2xl font-bold">{{ formatDistance(analyticsSummary.max_distance) }}</p>
+        <p class="text-sm text-slate-400 mt-1">Max Duration: {{ formatTime(analyticsSummary.max_duration) }}</p>
       </div>
     </div>
 
@@ -82,7 +89,7 @@
               <svg class="w-5 h-5 text-emerald-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
               </svg>
-              <span>{{ (route.distance_meters / 1000) | number: '1.1-1' }} km</span>
+              <span>{{ formatDistance(route.distance_meters) }}</span>
             </div>
           </div>
           <div>

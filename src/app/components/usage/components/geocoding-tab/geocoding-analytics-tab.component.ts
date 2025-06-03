@@ -13,6 +13,17 @@ export class GeocodingAnalyticsTabComponent {
   @Input() geocodingAnalytics: GeocodingAnalytics[] = [];
   @Input() apiUsageSummary: ApiUsageSummary | null = null;
 
+  get filteredGeocodingAnalytics(): GeocodingAnalytics[] {
+    if (!this.apiUsageSummary) {
+      return this.geocodingAnalytics;
+    }
+    
+    return this.geocodingAnalytics.filter(geo => {
+      const api = this.apiUsageSummary!.used_apis.find(a => a.id === geo.api_id);
+      return api && api.name.toLowerCase().includes('geocoding');
+    });
+  }
+
   getApiName(apiId: number): string {
     if (!this.apiUsageSummary) return `API ${apiId}`;
     const api = this.apiUsageSummary.used_apis.find(a => a.id === apiId);
