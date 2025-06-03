@@ -7,6 +7,8 @@ import { ServicesComponent } from './components/services/services.component';
 import { UsageComponent } from './components/usage/usage.component';
 import { KeysComponent } from './components/keys/keys.component'; 
 
+import { ApiDocumentationComponent } from './components/documentation/api-documentation.component';
+
 //AUTH
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -27,6 +29,10 @@ export const routes: Routes = [
     path: 'usage', // Add route for UsageComponent
     component: UsageComponent,
     canActivate: [authGuard] // Protect with authGuard (assumed, adjust if needed)
+  },
+  {
+    path: 'docs',
+    component: ApiDocumentationComponent,
   },
   {
     path: 'keys', // Add route for UsageComponent

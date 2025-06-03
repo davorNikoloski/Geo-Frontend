@@ -150,7 +150,7 @@ import { User } from '../../store/auth/auth.state';
             </li>
             <li>
               <a 
-                routerLink="/documentation" 
+                routerLink="/docs" 
                 routerLinkActive="text-emerald-400 bg-slate-700/50 md:bg-transparent"
                 class="flex items-center py-3 px-4 md:p-0 text-slate-300 rounded-lg hover:text-white hover:bg-slate-700/50 md:hover:bg-transparent md:hover:text-emerald-400 transition-all duration-200 font-medium"
               >

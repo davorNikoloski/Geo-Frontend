@@ -1,0 +1,37 @@
+<div class="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white">
+  <!-- Hero Section -->
+  <app-hero 
+    [title]="'Geospatial Services Documentation'" 
+    [subtitle]="'Comprehensive documentation for all geospatial APIs'">
+  </app-hero>
+  
+  <!-- Main Content Section -->
+  <section class="container mx-auto px-6 py-12 max-w-6xl">
+    <!-- Navigation Tabs -->
+    <app-tabs-navigation 
+      [activeTab]="activeTab" 
+      (changeTab)="changeTab($event)"
+      [tabs]="[
+        { id: 'geocoding', label: 'Geocoding API' },
+        { id: 'matrix', label: 'Matrix API' },
+        { id: 'directions', label: 'Directions API' },
+        { id: 'isochrone', label: 'Isochrone API' }
+      ]">
+    </app-tabs-navigation>
+
+    <!-- Tab Content -->
+    <div class="mt-8">
+      <!-- Geocoding API Documentation -->
+      <app-geocoding-docs *ngIf="activeTab === 'geocoding'"></app-geocoding-docs>
+      
+      <!-- Matrix API Documentation -->
+      <app-matrix-docs *ngIf="activeTab === 'matrix'"></app-matrix-docs>
+      
+      <!-- Directions API Documentation -->
+      <app-directions-docs *ngIf="activeTab === 'directions'"></app-directions-docs>
+      
+      <!-- Isochrone API Documentation -->
+      <app-isochrone-docs *ngIf="activeTab === 'isochrone'"></app-isochrone-docs>
+    </div>
+  </section>
+</div>
