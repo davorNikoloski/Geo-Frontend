@@ -1,4 +1,3 @@
-// src/app/components/navbar/navbar.component.ts
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -17,10 +16,7 @@ import { User } from '../../store/auth/auth.state';
         <!-- Logo/Brand -->
         <a routerLink="/home" class="flex items-center group">
           <div class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl flex items-center justify-center mr-3 group-hover:scale-105 transition-transform duration-200">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-            </svg>
+            <i class="fa-solid fa-location-dot text-white text-xl"></i>
           </div>
           <span class="text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors duration-200">
             Geo<span class="text-emerald-400">Services</span>
@@ -35,21 +31,23 @@ import { User } from '../../store/auth/auth.state';
               <!-- Unauthenticated state -->
               <a 
                 routerLink="/login" 
-                class="text-slate-300 hover:text-white px-4 py-2 rounded-lg hover:bg-slate-700/50 transition-all duration-200 font-medium"
+                class="flex items-center text-slate-300 hover:text-white px-4 py-2 rounded-lg hover:bg-slate-700/50 transition-all duration-200 font-medium"
               >
+                <i class="fa-solid fa-right-to-bracket text-slate-300 w-5 h-5 mr-2"></i>
                 Sign In
               </a>
               <a 
                 routerLink="/register" 
-                class="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-lg"
+                class="flex items-center bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-lg"
               >
+                <i class="fa-solid fa-user-plus text-white w-5 h-5 mr-2"></i>
                 Get Started
               </a>
             </ng-container>
             
             <ng-template #authenticatedUser>
               <!-- Authenticated state - Profile dropdown -->
-              <div class="relative" #dropdownContainer>
+              <div class="relative" data-dropdown-container>
                 <button 
                   type="button"
                   class="flex items-center space-x-2 text-slate-300 hover:text-white px-3 py-2 rounded-lg hover:bg-slate-700/50 transition-all duration-200"
@@ -57,21 +55,10 @@ import { User } from '../../store/auth/auth.state';
                 >
                   <!-- Profile Icon -->
                   <div class="w-8 h-8 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center">
-                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                    </svg>
+                    <i class="fa-solid fa-user text-white text-base"></i>
                   </div>
                   <span class="font-medium">{{ (user$ | async)?.firstname || 'User' }}</span>
-                  <!-- Dropdown arrow -->
-                  <svg 
-                    class="w-4 h-4 transition-transform duration-200" 
-                    [class.rotate-180]="isProfileDropdownOpen"
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
-                  >
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                  </svg>
+                  <i class="fa-solid fa-chevron-down text-slate-300 text-sm transition-transform duration-200" [ngClass]="{'rotate-180': isProfileDropdownOpen}"></i>
                 </button>
                 
                 <!-- Dropdown menu -->
@@ -89,20 +76,25 @@ import { User } from '../../store/auth/auth.state';
                     class="flex items-center px-4 py-2 text-sm text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors duration-200"
                     (click)="closeProfileDropdown()"
                   >
-                    <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                    </svg>
+                    <i class="fa-solid fa-user text-slate-300 w-5 h-5 mr-3"></i>
                     Profile
                   </a>
                   
+                  <a 
+                    routerLink="/keys" 
+                    class="flex items-center px-4 py-2 text-sm text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors duration-200"
+                    (click)="closeProfileDropdown()"
+                  >
+                    <i class="fa-solid fa-key text-slate-300 w-5 h-5 mr-3"></i>
+                    Keys
+                  </a>
+
                   <button 
                     type="button"
                     class="w-full flex items-center px-4 py-2 text-sm text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors duration-200 text-left"
                     (click)="logout()"
                   >
-                    <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-                    </svg>
+                    <i class="fa-solid fa-right-from-bracket text-slate-300 w-5 h-5 mr-3"></i>
                     Logout
                   </button>
                 </div>
@@ -115,11 +107,8 @@ import { User } from '../../store/auth/auth.state';
             class="md:hidden text-slate-400 hover:text-white hover:bg-slate-700/50 rounded-lg p-2.5 transition-all duration-200"
             (click)="toggleMenu()"
           >
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                    [attr.d]="isMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'">
-              </path>
-            </svg>
+            <i *ngIf="!isMenuOpen" class="fa-solid fa-bars text-slate-400 w-6 h-6"></i>
+            <i *ngIf="isMenuOpen" class="fa-solid fa-xmark text-slate-400 w-6 h-6"></i>
           </button>
         </div>
 
@@ -133,8 +122,9 @@ import { User } from '../../store/auth/auth.state';
               <a 
                 routerLink="/home" 
                 routerLinkActive="text-emerald-400 bg-slate-700/50 md:bg-transparent"
-                class="block py-3 px-4 md:p-0 text-slate-300 rounded-lg hover:text-white hover:bg-slate-700/50 md:hover:bg-transparent md:hover:text-emerald-400 transition-all duration-200 font-medium"
+                class="flex items-center py-3 px-4 md:p-0 text-slate-300 rounded-lg hover:text-white hover:bg-slate-700/50 md:hover:bg-transparent md:hover:text-emerald-400 transition-all duration-200 font-medium"
               >
+                <i class="fa-solid fa-house text-slate-300 w-5 h-5 mr-3 md:mr-2"></i>
                 Home
               </a>
             </li>
@@ -142,8 +132,9 @@ import { User } from '../../store/auth/auth.state';
               <a 
                 routerLink="/services" 
                 routerLinkActive="text-emerald-400 bg-slate-700/50 md:bg-transparent"
-                class="block py-3 px-4 md:p-0 text-slate-300 rounded-lg hover:text-white hover:bg-slate-700/50 md:hover:bg-transparent md:hover:text-emerald-400 transition-all duration-200 font-medium"
+                class="flex items-center py-3 px-4 md:p-0 text-slate-300 rounded-lg hover:text-white hover:bg-slate-700/50 md:hover:bg-transparent md:hover:text-emerald-400 transition-all duration-200 font-medium"
               >
+                <i class="fa-solid fa-gear text-slate-300 w-5 h-5 mr-3 md:mr-2"></i>
                 Services
               </a>
             </li>
@@ -151,8 +142,9 @@ import { User } from '../../store/auth/auth.state';
               <a 
                 routerLink="/usage" 
                 routerLinkActive="text-emerald-400 bg-slate-700/50 md:bg-transparent"
-                class="block py-3 px-4 md:p-0 text-slate-300 rounded-lg hover:text-white hover:bg-slate-700/50 md:hover:bg-transparent md:hover:text-emerald-400 transition-all duration-200 font-medium"
+                class="flex items-center py-3 px-4 md:p-0 text-slate-300 rounded-lg hover:text-white hover:bg-slate-700/50 md:hover:bg-transparent md:hover:text-emerald-400 transition-all duration-200 font-medium"
               >
+                <i class="fa-solid fa-chart-line text-slate-300 w-5 h-5 mr-3 md:mr-2"></i>
                 API Usage
               </a>
             </li>
@@ -160,8 +152,9 @@ import { User } from '../../store/auth/auth.state';
               <a 
                 routerLink="/documentation" 
                 routerLinkActive="text-emerald-400 bg-slate-700/50 md:bg-transparent"
-                class="block py-3 px-4 md:p-0 text-slate-300 rounded-lg hover:text-white hover:bg-slate-700/50 md:hover:bg-transparent md:hover:text-emerald-400 transition-all duration-200 font-medium"
+                class="flex items-center py-3 px-4 md:p-0 text-slate-300 rounded-lg hover:text-white hover:bg-slate-700/50 md:hover:bg-transparent md:hover:text-emerald-400 transition-all duration-200 font-medium"
               >
+                <i class="fa-solid fa-book text-slate-300 w-5 h-5 mr-3 md:mr-2"></i>
                 Docs
               </a>
             </li>
@@ -171,16 +164,18 @@ import { User } from '../../store/auth/auth.state';
               <li class="md:hidden border-t border-slate-700 pt-4 mt-4">
                 <a 
                   routerLink="/login" 
-                  class="block py-3 px-4 text-slate-300 rounded-lg hover:text-white hover:bg-slate-700/50 transition-all duration-200 font-medium"
+                  class="flex items-center py-3 px-4 text-slate-300 rounded-lg hover:text-white hover:bg-slate-700/50 transition-all duration-200 font-medium"
                 >
+                  <i class="fa-solid fa-right-to-bracket text-slate-300 w-5 h-5 mr-3"></i>
                   Sign In
                 </a>
               </li>
               <li class="md:hidden">
                 <a 
                   routerLink="/register" 
-                  class="block py-3 px-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-lg font-medium text-center hover:from-emerald-600 hover:to-teal-600 transition-all duration-200"
+                  class="flex items-center py-3 px-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-lg font-medium text-center hover:from-emerald-600 hover:to-teal-600 transition-all duration-200"
                 >
+                  <i class="fa-solid fa-user-plus text-white w-5 h-5 mr-3"></i>
                   Get Started
                 </a>
               </li>
@@ -190,9 +185,7 @@ import { User } from '../../store/auth/auth.state';
               <li class="md:hidden border-t border-slate-700 pt-4 mt-4">
                 <div class="flex items-center px-4 py-2 text-slate-300">
                   <div class="w-8 h-8 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center mr-3">
-                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                    </svg>
+                    <i class="fa-solid fa-user text-white w-5 h-5"></i>
                   </div>
                   <div>
                     <p class="font-medium text-white">{{ (user$ | async)?.firstname || 'User' }}</p>
@@ -206,10 +199,18 @@ import { User } from '../../store/auth/auth.state';
                   class="flex items-center py-3 px-4 text-slate-300 rounded-lg hover:text-white hover:bg-slate-700/50 transition-all duration-200 font-medium"
                   (click)="closeMenu()"
                 >
-                  <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                  </svg>
+                  <i class="fa-solid fa-user text-slate-300 w-5 h-5 mr-3"></i>
                   Profile
+                </a>
+              </li>
+              <li class="md:hidden">
+                <a 
+                  routerLink="/keys" 
+                  class="flex items-center py-3 px-4 text-slate-300 rounded-lg hover:text-white hover:bg-slate-700/50 transition-all duration-200 font-medium"
+                  (click)="closeMenu()"
+                >
+                  <i class="fa-solid fa-key text-slate-300 w-5 h-5 mr-3"></i>
+                  Keys
                 </a>
               </li>
               <li class="md:hidden">
@@ -218,9 +219,7 @@ import { User } from '../../store/auth/auth.state';
                   class="w-full flex items-center py-3 px-4 text-slate-300 rounded-lg hover:text-white hover:bg-slate-700/50 transition-all duration-200 font-medium text-left"
                   (click)="logout()"
                 >
-                  <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-                  </svg>
+                  <i class="fa-solid fa-right-from-bracket text-slate-300 w-5 h-5 mr-3"></i>
                   Logout
                 </button>
               </li>
@@ -231,6 +230,11 @@ import { User } from '../../store/auth/auth.state';
     </nav>
     <div class="md:h-[4rem] h-[1rem]"></div> <!-- Spacer for fixed navbar -->
   `,
+  styles: [
+    `
+      @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css';
+    `
+  ]
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   isMenuOpen = false;
@@ -246,6 +250,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    // Ensure Font Awesome is loaded
+    this.loadFontAwesome();
     // Close dropdowns when authentication state changes
     this.isAuthenticated$.pipe(
       takeUntil(this.destroy$)
@@ -258,6 +264,16 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  // Dynamically load Font Awesome to ensure icons persist
+  private loadFontAwesome() {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css';
+    link.crossOrigin = 'anonymous';
+    link.referrerPolicy = 'no-referrer';
+    document.head.appendChild(link);
   }
 
   toggleMenu() {

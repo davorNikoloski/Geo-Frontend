@@ -1,0 +1,54 @@
+<div *ngIf="activeTab === 'stats'" class="bg-slate-800 rounded-xl overflow-hidden shadow-2xl">
+  <div class="p-8">
+    <h2 class="text-2xl font-bold mb-6">Usage Statistics</h2>
+    
+    <!-- Stats Chart -->
+    <div *ngIf="usageStats.length > 0; else noChartData" class="bg-slate-700/50 rounded-lg p-6 mb-8">
+      <canvas id="usageChart" class="w-full h-64"></canvas>
+    </div>
+    <ng-template #noChartData>
+      <div class="bg-slate-700/50 rounded-lg p-6 mb-8 h-64 flex items-center justify-center">
+        <p class="text-slate-400">No data available for chart</p>
+      </div>
+    </ng-template>
+
+    <!-- Stats Table -->
+    <div *ngIf="usageStats.length > 0; else noTableData" class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-slate-700">
+        <thead>
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">Date</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">Requests</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">Avg Response</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">Request Data</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-slate-300 uppercase tracking-wider">Response Data</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-700">
+          <tr *ngFor="let stat of usageStats; trackBy: trackByTimePeriod">
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="font-medium">{{ stat.time_period | date: 'mediumDate' }}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-lg">{{ stat.count }}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-lg">{{ stat.avg_response_time | number: '1.2-2' }} ms</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-lg">{{ formatBytes(stat.total_request_size) }}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-lg">{{ formatBytes(stat.total_response_size) }}</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <ng-template #noTableData>
+      <div class="text-center py-8 text-slate-400">
+        <p>No usage statistics available</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

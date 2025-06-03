@@ -1,0 +1,45 @@
+<div class="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white">
+  <app-hero></app-hero>
+  
+  <section class="container mx-auto px-6 py-12 max-w-6xl">
+    <app-loading [isLoading]="isLoading"></app-loading>
+    <app-error [error]="error" (clearError)="clearError()"></app-error>
+    <app-tabs-navigation [activeTab]="activeTab" (changeTab)="changeTab($event)"></app-tabs-navigation>
+    <app-filters 
+      [apiUsageSummary]="apiUsageSummary" 
+      [selectedApi]="selectedApi" 
+      [timePeriod]="timePeriod"
+      (onApiChange)="onApiFilterChange($event)"
+      (onTimePeriodChange)="onTimePeriodChange($event)"
+      (refreshData)="refreshData()"
+    ></app-filters>
+    <app-summary-tab 
+      [activeTab]="activeTab" 
+      [apiUsageSummary]="apiUsageSummary" 
+      [usageSummary]="usageSummary"
+      [totalRequests]="totalRequests"
+      [averageResponseTime]="averageResponseTime"
+    ></app-summary-tab>
+    <app-usage-stats-tab [activeTab]="activeTab" [usageStats]="usageStats"></app-usage-stats-tab>
+    <app-recent-activity-tab 
+      [activeTab]="activeTab" 
+      [recentActivity]="recentActivity" 
+      [apiUsageSummary]="apiUsageSummary"
+    ></app-recent-activity-tab>
+    <app-route-analytics-tab 
+      [activeTab]="activeTab" 
+      [routeAnalytics]="routeAnalytics" 
+      [analyticsSummary]="analyticsSummary"
+      [routeTypeDistribution]="routeTypeDistribution"
+      [apiUsageSummary]="apiUsageSummary"
+    ></app-route-analytics-tab>
+    <app-geocoding-analytics-tab 
+      [activeTab]="activeTab" 
+      [geocodingAnalytics]="geocodingAnalytics" 
+      [apiUsageSummary]="apiUsageSummary"
+    ></app-geocoding-analytics-tab>
+  </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="chart-init.js"></script>

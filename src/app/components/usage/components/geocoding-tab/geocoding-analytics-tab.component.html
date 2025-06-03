@@ -1,0 +1,49 @@
+<div *ngIf="activeTab === 'geocoding'" class="bg-slate-800 rounded-xl overflow-hidden shadow-2xl">
+  <div class="p-8">
+    <h2 class="text-2xl font-bold mb-6">Geocoding Analytics</h2>
+    
+    <div *ngIf="geocodingAnalytics.length > 0; else noData" class="space-y-4">
+      <div *ngFor="let geo of geocodingAnalytics; trackBy: trackByGeocodingId" class="bg-slate-700/50 rounded-lg p-6">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+          <div class="flex items-center mb-2 md:mb-0">
+            <div class="w-10 h-10 bg-gradient-to-br from-purple-400 to-indigo-500 rounded-lg flex items-center justify-center mr-4">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-bold">{{ getApiName(geo.api_id) }}</h3>
+              <p class="text-sm text-slate-400">{{ geo.location_type | uppercase }}</p>
+            </div>
+          </div>
+          <div class="text-sm text-slate-300">{{ formatDate(geo.timestamp) }}</div>
+        </div>
+        
+        <div class="mt-4">
+          <p class="text-sm text-slate-400 mb-1">Original Address</p>
+          <p class="font-medium mb-4">{{ geo.address }}</p>
+          
+          <p class="text-sm text-slate-400 mb-1">Formatted Address</p>
+          <p class="font-medium mb-4">{{ geo.formatted_address }}</p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <p class="text-sm text-slate-400 mb-1">Place ID</p>
+              <p class="font-medium text-sm break-all">{{ geo.place_id }}</p>
+            </div>
+            <div>
+              <p class="text-sm text-slate-400 mb-1">Location Type</p>
+              <p class="font-medium capitalize">{{ geo.location_type }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #noData>
+      <div class="text-center py-8 text-slate-400">
+        <p>No geocoding analytics data available</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

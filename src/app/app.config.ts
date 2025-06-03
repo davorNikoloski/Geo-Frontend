@@ -6,6 +6,9 @@ import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { reducers } from './store';
 import { AuthEffects } from './store/auth/auth.effects';
+import { UsageEffects } from './store/usage/usage.effects';
+import { ApiKeyEffects } from './store/apiKey/apiKey.effects';
+
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './interceptors/auth.interceptor';
 import { environment } from '../environments/environment';
@@ -20,7 +23,7 @@ export const appConfig: ApplicationConfig = {
       withInterceptors([authInterceptor])
     ),
     provideStore(reducers),
-    provideEffects([AuthEffects]),
+    provideEffects([AuthEffects, UsageEffects, ApiKeyEffects]),
     provideStoreDevtools({
       maxAge: 25,
       logOnly: environment.production,
