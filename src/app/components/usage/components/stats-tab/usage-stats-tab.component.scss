@@ -1,0 +1,44 @@
+:host {
+  display: block;
+}
+
+.ngx-charts {
+  text {
+    fill: #94a3b8 !important;
+  }
+
+  .gridline-path {
+    stroke: #334155 !important;
+  }
+
+  .tick {
+    line {
+      stroke: #334155 !important;
+      stroke-dasharray: 3,3;
+      opacity: 0.5;
+      stroke-width: 1px;
+      shape-rendering: crispEdges;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-opacity: 1;
+      stroke-dashoffset: 0;
+      stroke-miterlimit: 4;
+    }
+  }
+}
+
+.custom-tooltip {
+  background: rgba(15, 23, 42, 0.9) !important;
+  border: 1px solid #1e293b !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1.5em;
+  padding-right: 2rem;
+}

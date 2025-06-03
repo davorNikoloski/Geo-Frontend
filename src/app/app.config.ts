@@ -14,6 +14,7 @@ import { authInterceptor } from './interceptors/auth.interceptor';
 import { environment } from '../environments/environment';
 import { APP_INITIALIZER } from '@angular/core';
 import { authInitializer } from './store/auth/auth-initializer';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -30,7 +31,7 @@ export const appConfig: ApplicationConfig = {
       autoPause: true
     }),
     importProvidersFrom([
-      // Optional: Global modules like FormsModule or ReactiveFormsModule if needed
+      BrowserAnimationsModule, // Add this line for ngx-charts animations
     ]),
     {
       provide: APP_INITIALIZER,

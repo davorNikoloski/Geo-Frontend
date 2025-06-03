@@ -20,7 +20,15 @@
       [totalRequests]="totalRequests"
       [averageResponseTime]="averageResponseTime"
     ></app-summary-tab>
-    <app-usage-stats-tab [activeTab]="activeTab" [usageStats]="usageStats"></app-usage-stats-tab>
+    <!-- Updated usage stats component call in parent template -->
+      <app-usage-stats-tab 
+        [activeTab]="activeTab" 
+        [usageStats]="usageStats"
+        [geocodingAnalytics]="geocodingAnalytics"
+        [routeAnalytics]="routeAnalytics"
+        [apiUsageSummary]="apiUsageSummary"
+        [usageSummary]="usageSummary"
+      ></app-usage-stats-tab>
     <app-recent-activity-tab 
       [activeTab]="activeTab" 
       [recentActivity]="recentActivity" 
@@ -41,5 +49,3 @@
   </section>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="chart-init.js"></script>
